@@ -11,17 +11,7 @@ app.use(logger("dev", {
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-
-app.get('/', function (req, res) {
-
-	res.render('index', { 
-		titel : "Hello World, <em>det er koldt i dag</em>",
-		indhold: "indholdet",
-		etTal: 123,
-		
-	});
-
-}); 
+require('./routes.js')(app);
 
 app.use(express.static('public'));
 
