@@ -12,6 +12,13 @@
 	<h2><%= titel %></h2>
 	<p><%= indhold %></p>
 
+	<form action="/book/create" method="POST">
+		<p>Titel: </p><input type="text" name="titel" value="<%= titel %>">
+		<p>Bool:</p> <input type="checkbox" name="read" <%= typeof read != 'undefined' && read == true ? 'checked' : '' %> >
+		
+		<button>Gem</button>
+	</form>
+
 
 </body>
 </html>
