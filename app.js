@@ -18,6 +18,15 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+const mongoose = require("mongoose");
+// starter mongoDb og opretter forbindelsen til databasen, 
+// også selv om variablen 'db' ikke benyttes
+const db = mongoose.connect("mongodb://localhost:27017/ServersideScriptingQ1_2021", {
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+   useFindAndModify: false
+});
+
 require('./routes.js')(app);
 
 app.use(express.static('public'));

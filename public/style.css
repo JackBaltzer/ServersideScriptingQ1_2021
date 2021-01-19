@@ -1,3 +1,13 @@
-body{
+body {
 	background-color: aquamarine;
+}
+
+label {
+	display: inline-block;
+	width: 75px;
+}
+
+input,
+button {
+	margin: 2px;
 }

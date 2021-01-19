@@ -1,10 +1,29 @@
+const Book = require('./models/bookModel');
+
+
+
+
+
 module.exports = (app) => {
-	app.get('/', function (req, res) {
+	app.get('/', async function (req, res) {
+
+
+		// let book = new Book();
+		// book.title = "Derp";
+		// book.author = "Hans";
+		// book.pages = 123;
+		// book.isRead = false;
+		// book.save();
+
+		let books = await Book.find();
+
+
 		res.render('index', {
-			titel: "Hello World, <em>det er koldt i dag</em>",
-			indhold: "indholdet",
-			etTal: 123,
-			
+			books: books,
+			title: "Titel",
+			author: "Forfatter",
+			pages: 123,
+			isRead: false
 		});
 	});
 
@@ -16,17 +35,17 @@ module.exports = (app) => {
 
 		console.log(req.body);
 
-		if (req.body.read != undefined) {
-			req.body.read = true;
+		if (req.body.isRead != undefined) {
+			req.body.isRead = true;
 		} else {
-			req.body.read = false;
+			req.body.isRead = false;
 		}
 
 		res.render('index', {
-			titel: req.body.titel,
-			indhold: "indholdet",
-			etTal: 123,
-			read : req.body.read
+			title: req.body.title,
+			author: req.body.author,
+			pages: parseInt(req.body.pages),
+			isRead: req.body.isRead
 		});
 
 	});
