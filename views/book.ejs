@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+	<%- include('partials/nav.ejs') %>
+
+		<h1>Bogadministration</h1>
+
+
+
+
+		<form method="POST">
+			<div>
+				<label>Titel:</label>
+				<input type="text" name="title" value="<%= typeof title != 'undefined' ? title : '' %>">
+			</div>
+			<div>
+				<label>Forfatter:</label>
+				<input type="text" name="author" value="<%= typeof author != 'undefined' ? author : '' %>">
+			</div>
+			<div>
+				<label>Sider:</label>
+				<input type="number" name="pages" value="<%= typeof pages != 'undefined' ? pages : ''  %>">
+			</div>
+			<div>
+				<label>Læst?:</label>
+				<input type="checkbox" name="read" <%=typeof read !='undefined' && read==true ? 'checked' : '' %> >
+			</div>
+			<button>Gem</button>
+		</form>
+
+
+		<table>
+			<tr>
+				<th>handlinger</th>
+				<th>Id</th>
+				<th>Titel</th>
+			</tr>
+
+
+			<% books.forEach((book)=>{ %>
+				<tr>
+					<td>
+						<a href="/admin/book/edit/<%= book._id  %>">RET</a>
+						<a href="/admin/book/delete/<%= book._id  %>">SLET</a>
+					</td>
+					<td></td>
+					<td><%= book.title %></td>
+				</tr>
+			<% }) %>
+
+		</table>
+</body>
+
+</html>

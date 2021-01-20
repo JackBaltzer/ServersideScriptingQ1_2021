@@ -7,7 +7,6 @@ const Book = require('./models/bookModel');
 module.exports = (app) => {
 	app.get('/', async function (req, res) {
 
-
 		// let book = new Book();
 		// book.title = "Derp";
 		// book.author = "Hans";
@@ -31,9 +30,16 @@ module.exports = (app) => {
 		res.send(' GET /book/:id');
 	});
 
-	app.post('/book/create', function (req, res) {
 
-		console.log(req.body);
+	app.get('/admin/book', async function (req, res) {
+		let books = await Book.find();
+		res.render('book', {
+			books
+		});
+	});
+
+
+	app.post('/admin/book', function (req, res) {
 
 		if (req.body.isRead != undefined) {
 			req.body.isRead = true;
@@ -41,12 +47,10 @@ module.exports = (app) => {
 			req.body.isRead = false;
 		}
 
-		res.render('index', {
-			title: req.body.title,
-			author: req.body.author,
-			pages: parseInt(req.body.pages),
-			isRead: req.body.isRead
-		});
+		let book = new Book(req.body);
+		book.save();
+
+		res.redirect('/admin/book');
 
 	});
 

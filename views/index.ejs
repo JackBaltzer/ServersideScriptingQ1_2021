@@ -10,38 +10,15 @@
 
 <body>
 
+	<%- include('partials/nav.ejs') %>
+
 	<h1>HELLO WORLD</h1>
 
 
 	<% books.forEach((book)=>{ %>
 		<h2><%= book.title %></h2>
-
-
 	<% }) %>
 
-
-	<h1><%=  typeof title != 'undefined' ? title : '' %> </h1>
-	<p><%= typeof author != 'undefined' ? author : '' %>, <%= typeof pages != 'undefined' ? pages : '' %></p>
-
-	<form action="/book/create" method="POST">
-		<div>
-			<label>Titel:</label>
-			<input type="text" name="title" value="<%= typeof title != 'undefined' ? title : '' %>">
-		</div>
-		<div>
-			<label>Forfatter:</label>
-			<input type="text" name="author" value="<%= typeof author != 'undefined' ? author : '' %>">
-		</div>
-		<div>
-			<label>Sider:</label>
-			<input type="number" name="pages" value="<%= typeof pages != 'undefined' ? pages : ''  %>">
-		</div>
-		<div>
-			<label>Læst?:</label>
-			<input type="checkbox" name="read" <%=typeof read !='undefined' && read==true ? 'checked' : '' %> label>
-		</div>
-		<button>Gem</button>
-	</form>
 
 
 </body>
