@@ -20,29 +20,37 @@
 		<form method="POST">
 			<div>
 				<label>Titel:</label>
-				<input type="text" name="title" value="<%= typeof title != 'undefined' ? title : '' %>">
+				<input type="text" name="title" value="<%= typeof book != 'undefined' ? book.title : '' %>">
 			</div>
 			<div>
 				<label>Forfatter:</label>
-				<input type="text" name="author" value="<%= typeof author != 'undefined' ? author : '' %>">
+				<input type="text" name="author" value="<%= typeof book != 'undefined' ? book.author : '' %>">
 			</div>
 			<div>
 				<label>Sider:</label>
-				<input type="number" name="pages" value="<%= typeof pages != 'undefined' ? pages : ''  %>">
+				<input type="text" name="pages" value="<%= typeof book != 'undefined' ? book.pages : ''  %>">
 			</div>
 			<div>
 				<label>Læst?:</label>
-				<input type="checkbox" name="read" <%=typeof read !='undefined' && read==true ? 'checked' : '' %> >
+				<input type="checkbox" name="isRead" <%=typeof book !='undefined' && book.isRead == true ? 'checked' : '' %> >
 			</div>
-			<button>Gem</button>
+			<button>Gem</button><a href="/admin/book">Annuller</a>
 		</form>
 
+		<% if(typeof message != 'undefined' && message.length > 0) { %>
+			<p class="error"><strong>Følgende fejl er opstået: </strong><%= message.join(', ') %></p>
+		<% } %>
+
+
+
+		<% if(typeof books != 'undefined'){ %>
 
 		<table>
 			<tr>
 				<th>handlinger</th>
 				<th>Id</th>
 				<th>Titel</th>
+				<th>Læst?</th>
 			</tr>
 
 
@@ -50,14 +58,18 @@
 				<tr>
 					<td>
 						<a href="/admin/book/edit/<%= book._id  %>">RET</a>
-						<a href="/admin/book/delete/<%= book._id  %>">SLET</a>
+						<a href="/admin/book/delete/<%= book._id  %>" onclick="return confirm('er du sikker?')">SLET</a>
 					</td>
-					<td></td>
-					<td><%= book.title %></td>
+					<td><%= book._id  %></td>
+					<td>
+						<%= book.title %>
+					</td>
+					<td><%= book.isRead ? "Ja" : "Nej" %></td>
 				</tr>
-			<% }) %>
+				<% }) %>
 
 		</table>
+		<% } %>
 </body>
 
 </html>

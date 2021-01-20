@@ -1,5 +1,6 @@
 body {
 	background-color: aquamarine;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 label {
@@ -10,4 +11,8 @@ label {
 input,
 button {
 	margin: 2px;
+}
+
+.error{
+	color:#f00;
 }
