@@ -17,6 +17,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+const fileupload = require('express-fileupload');
+app.use(fileupload({
+   limits: {
+      fileSize: 10 * 1024 * 1024
+   } // 10mb
+}));
 
 const mongoose = require("mongoose");
 // starter mongoDb og opretter forbindelsen til databasen, 

@@ -1,6 +1,12 @@
 const Book = require('./models/bookModel');
+const {
+	v4: uuidv4
+} = require('uuid');
+const path = require('path');
 
-module.exports = (app) => {
+module.exports = function (app) {
+
+
 	app.get('/', async function (req, res) {
 		let books = await Book.find();
 		res.render('index', {
@@ -21,7 +27,7 @@ module.exports = (app) => {
 	});
 
 
-	app.post('/admin/book', function (req, res) {
+	app.post('/admin/book', async function (req, res) {
 
 		if (req.body.isRead != undefined) {
 			req.body.isRead = true;
@@ -29,8 +35,14 @@ module.exports = (app) => {
 			req.body.isRead = false;
 		}
 
+		let file = req.files.imageFile;
+		let imageName = uuidv4() + path.extname(file.name); // 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed.jpg
+		await file.mv('./public/images/' + imageName);
+
 		let book = new Book(req.body);
+		book.imageName = imageName;
 		book.save();
+		
 
 		res.redirect('/admin/book');
 
@@ -68,7 +80,7 @@ module.exports = (app) => {
 				message
 			});
 
-		// håndter hvis validering er ok
+			// håndter hvis validering er ok
 		} else {
 			if (req.body.isRead != undefined) {
 				req.body.isRead = true;
