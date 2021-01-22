@@ -39,5 +39,5 @@ app.use(express.static('public'));
 
 app.listen(port, function(err){
 	if(err) console.log(err);
-	console.log('Serveren kører! er tilgængelig: http://localhost:' + port);
+	console.log('Serveren kører! er tilgængelig på: http://localhost:' + port);
 });

@@ -30,50 +30,62 @@
 				<label>Sider:</label>
 				<input type="text" name="pages" value="<%= typeof book != 'undefined' ? book.pages : ''  %>">
 			</div>
+		<% if(typeof book !='undefined' && book.imageName !=null) { %>
+			<div>
+				<label>Eksisterende Billede:</label>
+				<img class="img-preview" src="/images/<%= book.imageName %>">
+			</div>
+		<% } %>
 			<div>
 				<label>Billede:</label>
 				<input type="file" name="imageFile">
 			</div>
 			<div>
 				<label>Læst?:</label>
-				<input type="checkbox" name="isRead" <%=typeof book !='undefined' && book.isRead == true ? 'checked' : '' %> >
+				<input type="checkbox" name="isRead" <%=typeof book !='undefined' && book.isRead==true ? 'checked' : '' %> >
 			</div>
 			<button>Gem</button><a href="/admin/book">Annuller</a>
 		</form>
 
-		<% if(typeof message != 'undefined' && message.length > 0) { %>
-			<p class="error"><strong>Følgende fejl er opstået: </strong><%= message.join(', ') %></p>
+		<% if(typeof message !='undefined' && message.length> 0) { %>
+			<p class="error"><strong>Følgende fejl er opstået: </strong>
+				<%= message.join(', ') %></p>
 		<% } %>
 
 
 
-		<% if(typeof books != 'undefined'){ %>
+		<% if(typeof books != ' undefined'){ %>
 
-		<table>
-			<tr>
-				<th>handlinger</th>
-				<th>Id</th>
-				<th>Titel</th>
-				<th>Læst?</th>
-			</tr>
+					<table>
+						<tr>
+							<th>handlinger</th>
+							<th>Id</th>
+							<th>Titel</th>
+							<th>Læst?</th>
+						</tr>
 
 
-			<% books.forEach((book)=>{ %>
-				<tr>
-					<td>
-						<a href="/admin/book/edit/<%= book._id  %>">RET</a>
-						<a href="/admin/book/delete/<%= book._id  %>" onclick="return confirm('er du sikker?')">SLET</a>
-					</td>
-					<td><%= book._id  %></td>
-					<td>
-						<%= book.title %>
-					</td>
-					<td><%= book.isRead ? "Ja" : "Nej" %></td>
-				</tr>
-				<% }) %>
+						<% books.forEach((book)=>{ %>
+							<tr>
+								<td>
+									<a href="/admin/book/edit/<%= book._id  %>">RET</a>
+									<a href="/admin/book/delete/<%= book._id  %>"
+										onclick="return confirm('er du sikker?')">SLET</a>
+								</td>
+								<td>
+									<%= book._id %>
+								</td>
+								<td>
+									<%= book.title %>
+								</td>
+								<td>
+									<%= book.isRead ? "Ja" : "Nej" %>
+								</td>
+							</tr>
+							<% }) %>
 
-		</table>
-		<% } %>
+					</table>
+					<% } %>
 </body>
 
 </html>
